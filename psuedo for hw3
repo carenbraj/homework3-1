@@ -1,0 +1,7 @@
+create a button to generate password
+create prompts for each password criteria
+when prompt comes up user can select the criteria
+create a prompt for length at least 8 characters and no more than 128
+create a prompt to choose character type of lowercase, uppercase, numeric, and/or special character
+allow user to answer and validate and at least one character should be selected
+password is generated to match selected criteria and displayed in alert or written to page
