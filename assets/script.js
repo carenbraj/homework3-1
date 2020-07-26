@@ -7,53 +7,151 @@
 // password is generated to match selected criteria and displayed in alert or written to page
 // Forloop - length of pw and get random criteria
 
-// AlERT user of new pw
+// AlERT user of new
 
 // -->this is week 4 knowledge -->
 // get id of html where test will be displayed
 // generated pw shows on page --ALERT
 
-var generatedPassword = ""
-var charToChooseFrom = []
-
 // prompt variables
-var numberArr = "0123456789";
-var lowerArr = "abcdefghijklmnopqrstuvwxyz";
-var upperArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var charArr = "~!@#$%^&*()_+=";
-var lengthArr = "";
+var numberEl = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var lowerEl = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",];
+var upperEl = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",];
+var charEl = [
+  "!",
+  "#",
+  "$",
+  "%",
+  "&",
+  "'",
+  "(",
+  ")",
+  "*",
+  "+",
+  ",",
+  "-",
+  ".",
+  "/",
+  ":",
+  ";",
+  " < ",
+  "=",
+  " > ",
+  " ? ",
+  "@",
+  "[",
+  "\\",
+  "]",
+  " ^ ",
+  "_",
+  "`",
+  "{",
+  "|",
+  "}",
+  "~",];
 
-var button = document.getElementById("generate");
 
-// create object for user selection
-var userType = {};
-
-// promt user to select character length
-var charLength = parseInt(prompt("Please type in a number between 8 and 128"));
 
 // prompt user to get input
 function promptUser() {
-    // var lengthChar = parseIn(prompt("How long would you like your password to be?"));
-    var lowerChar = prompt("Would you like lowercase letters?");
-    var upperChar = prompt("Would you like uppercase letters?");
-    var numberChar = prompt("Would you like numbers?");
-    var specialChar = prompt("Would you like special characters?");
+var charLength = parseInt(prompt("Please type in a number between 8 and 128"));
 
-    // if (lengthChar) {
-    //     userType[lengthArr] = lengthArr;
-    // }
-    if (lowerChar) {
-        userType[lowerArr] = lowerArr;
-    }
-    if (upperChar) {
-        userType[upperArr] = upperArr;
-    }
-    if (numberChar) {
-        userType[numberArr] = numberArr;
-    }
-    if (specialChar) {
-        userType[charArr] = charArr;
-    }
+if (isNaN(charLength)===true) {
+    alert("Character length has to be a number.")
+    return
+}
+if (charLength < 8){
+    alert("Character length needs to be more than 8.")
+    return
+}
+
+if (charLength > 128) {
+    alert("Character length needs to be less than 128.")
+    return    
+}
+
+var lowerChar = confirm("Would you like lowercase letters?");
+var upperChar = confirm("Would you like uppercase letters?");
+var numberChar = confirm("Would you like numbers?");
+var specialChar = confirm("Would you like special characters?");
+
+if (lowerChar===false && upperChar===false && numberChar===false && specialChar===false) {
+    alert("Please select at least one character.")
+    return
+}
+
+// create object for user selection
+var userType = {
+    charLength:charLength,
+    lowerChar:lowerChar,
+    upperChar:upperChar,
+    numberChar:numberChar,
+    specialChar:specialChar,
+};
+    
+}
 
 promptUser();
 
+function generatePassword (numberEl, lowerEl, upperEl, charEl) {
+    var pass = "";
+
+    for (let i = 0; i < generatePassword; i++) {
+        var i = Math.floor(Math.random())
+        
+    }
+}
+    
+}
