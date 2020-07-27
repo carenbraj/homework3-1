@@ -13,8 +13,11 @@
 // get id of html where test will be displayed
 // generated pw shows on page --ALERT
 
-// prompt variables
-var numberEl = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var generateBtn = document.querySelector("#generate")
+var passwordText = document.querySelector("#password")
+var generatedPassword = ""
+var characters = []
+var numberEl = [0,1,2,3,4,5,6,7,8,9];
 var lowerEl = [
   "a",
   "b",
@@ -105,53 +108,53 @@ var charEl = [
 
 
 // prompt user to get input
-function promptUser() {
-var charLength = parseInt(prompt("Please type in a number between 8 and 128"));
+function generatePassword () {
+var charLength =parseInt(prompt("How many characters would you like your password to be?"))
 
-if (isNaN(charLength)===true) {
-    alert("Character length has to be a number.")
-    return
-}
-if (charLength < 8){
-    alert("Character length needs to be more than 8.")
-    return
-}
-
-if (charLength > 128) {
-    alert("Character length needs to be less than 128.")
-    return    
-}
+    if (charLength <8 || charLength > 128 || isNaN(charLength)){
+        alert(" Your password must be a number between 8 and 128")
+        charLength =parseInt(prompt("How many characters do you want your password to be?"))
+    
+      }
+   
+// var charLength = parseInt(prompt("Please type in a number between 8 and 128"));
 
 var lowerChar = confirm("Would you like lowercase letters?");
 var upperChar = confirm("Would you like uppercase letters?");
 var numberChar = confirm("Would you like numbers?");
 var specialChar = confirm("Would you like special characters?");
 
-if (lowerChar===false && upperChar===false && numberChar===false && specialChar===false) {
-    alert("Please select at least one character.")
-    return
-}
-
-// create object for user selection
-var userType = {
-    charLength:charLength,
-    lowerChar:lowerChar,
-    upperChar:upperChar,
-    numberChar:numberChar,
-    specialChar:specialChar,
-};
-    
-}
-
-promptUser();
-
-function generatePassword (numberEl, lowerEl, upperEl, charEl) {
-    var pass = "";
-
-    for (let i = 0; i < generatePassword; i++) {
-        var i = Math.floor(Math.random())
-        
+   
+if (lowerChar || upperChar || numberChar || specialChar){
+    if (inLowCase){
+      characters = characters.concat(lowerEl);
     }
+  if(inUpCase){
+    characters = characters.concat(upperEl)
+  }
+  if(inNum){
+    characters = characters.concat(numberEl)
+  }
+  if(inSpeChar){
+    characters = characters.concat(charEl)
 }
-    
-}
+
+
+for (var i = 0; i < charLength.length; i++) {
+    var genIndex =  characters[Math.floor(Math.random() * characters.length)];
+    generatedPassword = generatePassword + genIndex
+   }  
+    passwordText.textContent = generatedPassword
+   }
+   else {
+     console.log("choose an option")
+   } 
+  }
+generateBtn.addEventListener("click", generatePassword)
+
+// function getText() {
+//   var txt =document.getElementById("txtWord").innerHTML
+// }
+
+
+
