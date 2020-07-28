@@ -13,10 +13,7 @@
 // get id of html where test will be displayed
 // generated pw shows on page --ALERT
 
-var generateBtn = document.querySelector("#generate")
-var passwordText = document.querySelector("#password")
-var generatedPassword = ""
-var characters = []
+
 var numberEl = [0,1,2,3,4,5,6,7,8,9];
 var lowerEl = [
   "a",
@@ -108,7 +105,7 @@ var charEl = [
 
 
 // prompt user to get input
-function generatePassword () {
+function getPasswordOptions () {
 var charLength =parseInt(prompt("How many characters would you like your password to be?"))
 
     if (charLength <8 || charLength > 128 || isNaN(charLength)){
@@ -124,37 +121,70 @@ var upperChar = confirm("Would you like uppercase letters?");
 var numberChar = confirm("Would you like numbers?");
 var specialChar = confirm("Would you like special characters?");
 
-   
-if (lowerChar || upperChar || numberChar || specialChar){
-    if (inLowCase){
-      characters = characters.concat(lowerEl);
-    }
-  if(inUpCase){
-    characters = characters.concat(upperEl)
-  }
-  if(inNum){
-    characters = characters.concat(numberEl)
-  }
-  if(inSpeChar){
-    characters = characters.concat(charEl)
+if (lowerChar=== false && upperChar=== false && numberChar=== false && specialChar=== false) {
+  alert("You must select at least one character type.")
+  return  
+}  
+var passwordOption = {
+  charLength: charLength,
+  lowerChar: lowerChar,
+  upperChar: upperChar,
+  numberChar: numberChar,
+  specialChar: specialChar
+}
+
+return passwordOption;
+}
+
+function getRandom(arr) {
+  var randIndex = Math.floor(Math.random() * arr.length);
+  var randElement = arr[randIndex];
+  return randElement;
 }
 
 
-for (var i = 0; i < charLength.length; i++) {
-    var genIndex =  characters[Math.floor(Math.random() * characters.length)];
-    generatedPassword = generatePassword + genIndex
-   }  
-    passwordText.textContent = generatedPassword
-   }
-   else {
-     console.log("choose an option")
-   } 
+function generatePassword() {
+  var options = getPasswordOptions();
+  var result = [];
+  var possibleCharacters = [];
+  var guaranteedCharacters = [];
+  if (options.specialChar) {
+    possibleCharacters = possibleCharacters.concat(charEl);
+    guaranteedCharacters.push(getRandom(charEl));
   }
-generateBtn.addEventListener("click", generatePassword)
+  if (options.numberChar) {
+    possibleCharacters = possibleCharacters.concat(numberEl);
+    guaranteedCharacters.push(getRandom(numberEl));
+  }
+  if (options.lowerChar) {
+    possibleCharacters = possibleCharacters.concat(lowerEl);
+    guaranteedCharacters.push(getRandom(lowerEl));
+  }
+  if (options.upperChar) {
+    possibleCharacters = possibleCharacters.concat(upperEl);
+    guaranteedCharacters.push(getRandom(upperEl));
+  }
+  for (var i = 0; i < options.charLength; i++) {
+    var possibleCharacter = getRandom(possibleCharacters);
+    result.push(possibleCharacter);
+  }
+  for (var i = 0; i < guaranteedCharacters.length; i++) {
+    result[i] = guaranteedCharacters[i];
+  }
+  return result.join('');
+}
 
-// function getText() {
-//   var txt =document.getElementById("txtWord").innerHTML
-// }
+var generateBtn = document.querySelector('#generate');
+
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector('#password');
+  passwordText.value = password;
+}
+
+generateBtn.addEventListener("click", writePassword)
+
+
 
 
 
